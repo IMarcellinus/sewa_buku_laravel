@@ -13,13 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'App\Http\Controllers\IndexController@index');
-
-Route::get('home', function(){
-    return view('home');
+Route::get('/', function () {
+    return view('auth/login');
 });
 
-Route::get('peminjaman', 'App\Http\Controllers\PeminjamanController@index');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+
+Route::get('peminjaman', 'App\Http\Controllers\PeminjamanController@index')->name('peminjaman.index');
 
 Route::get('peminjaman/create', 'App\Http\Controllers\PeminjamanController@create')->name('peminjaman.create');
 
@@ -29,7 +33,7 @@ Route::get('peminjaman/detail_peminjam/{id}', 'App\Http\Controllers\PeminjamanCo
 
 Route::get('peminjaman/detail_buku/{id}', 'App\Http\Controllers\PeminjamanController@detail_buku')->name('peminjaman.detail_buku');
 
-Route::get('data_peminjam', 'App\Http\Controllers\DataPeminjamController@index');
+Route::get('data_peminjam', 'App\Http\Controllers\DataPeminjamController@index')->name('data_peminjam.index');
 
 Route::get('data_peminjam/create', 'App\Http\Controllers\DataPeminjamController@create')->name('data_peminjam.create');
 

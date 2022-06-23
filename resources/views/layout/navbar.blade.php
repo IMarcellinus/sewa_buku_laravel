@@ -7,12 +7,24 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a href="#" class="nav-link active" aria-current="page">Home</a>
+                    <a href="{{ route('data_peminjam.index') }}" class="nav-link active" aria-current="page">Data Peminjam</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Lihat Data Peminjam</a>
+                    <a href="{{ route('peminjaman.index') }}" class="nav-link">Transaksi Peminjaman</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('logout') }}" class="btn btn-danger btn-sm" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                    <form action="{{ route('logout') }}" method="post" class="d-none">
+                        @csrf
+                    </form>
                 </li>
             </ul>
+            <div>
+                @if(Auth::check())
+                    <b>{{ 'Hai, '. Auth::user()->name }}</b>
+                @else
+                @endif
+            </div>
             <form action="" class="d-flex">
                 <input type="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
